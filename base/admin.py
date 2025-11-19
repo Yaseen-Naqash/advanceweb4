@@ -1,6 +1,50 @@
 from django.contrib import admin
 from .models import Book, Category, Writer
 # Register your models here.
-admin.site.register(Book)
+
 admin.site.register(Category)
 admin.site.register(Writer)
+
+
+class BookAdmin(admin.ModelAdmin):
+    # list view
+    search_fields = ['title']
+    list_display = ['title', 'price', 'rate', 'writer']
+    list_filter = ['language']
+    list_editable = ['price']
+    
+
+    # detail view
+
+    # readonly_fields = ['rate']
+
+    # exclude = ['publisher']
+
+    fieldsets = [
+        (
+            "اطلاعات کتاب ",
+            {
+                "fields": ["title", "description"],
+            },
+        ),
+        (
+            "اطلاعات ناشر",
+            {
+                
+                "fields": ["publisher", 'price', "rate"],
+            },
+        ),
+        (
+            "باقی",
+            {
+                
+                "fields": ["writer", "categories"],
+            },
+        ),
+    ]
+
+
+
+    pass
+
+admin.site.register(Book, BookAdmin)
