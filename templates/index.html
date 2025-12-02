@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
-    <title>Document</title>
+    <title></title>
   </head>
   <body>
     <!-- Hamber menu -->
@@ -69,25 +69,28 @@
           </div>
         </div>
       </section>
-
       <!-- New Products -->
       <section class="new_products">
         <div class="container">
           <h2>New Products</h2>
 
           <div class="products">
+
+            {% for product in products %}
             <!-- Product 1 -->
             <div class="product">
               <div class="product_card">
-                <img src="{% static 'assets/images/product1.png' %}" alt="Product-1" />
+                <img src="{{ product.image.url }}" alt="Product-1" />
                 <div class="card_body">
                   <div class="body_part">
-                    <p class="title">T-shirt</p>
-                    <p class="price">45$</p>
+                    <p class="title">{{ product.title }}</p>
+                    <p class="price" {% if product.price == product.final_price %}style="text-decoration: none;"{% endif %} >{{ product.price }}$</p>
                   </div>
                   <div class="body_part">
-                    <p class="description">Size 40</p>
-                    <p class="discount">40$</p>
+                    <p class="description">Size {{ product.get_size_display }}</p>
+                    {% if product.price != product.final_price %}
+                    <p class="discount">{{ product.final_price }}$</p>
+                    {% endif %}
                   </div>
                   <div class="product_btn">
                     <a href="{% url 'details_url' %}" class="product_button">View</a>
@@ -96,60 +99,8 @@
               </div>
             </div>
 
-            <!-- Product 2 -->
-            <div class="product">
-              <div class="product_card">
-                <img src="{% static 'assets/images/product2.jpg' %}" alt="Product-2" />
-                <div class="card_body">
-                  <div class="body_part">
-                    <p class="title">T-shirt</p>
-                    <p class="price">90$</p>
-                  </div>
-                  <div class="body_part">
-                    <p class="description">Size 32</p>
-                    <p class="discount">85$</p>
-                  </div>
-                  <a href="{% url 'details_url' %}" class="product_button">View</a>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
 
-            <!-- Product 3 -->
-            <div class="product">
-              <div class="product_card">
-                <img src="{% static 'assets/images/product1.png' %}" alt="Product-3" />
-                <div class="card_body">
-                  <div class="body_part">
-                    <p class="title">T-shirt</p>
-                    <p class="price">45$</p>
-                  </div>
-                  <div class="body_part">
-                    <p class="description">Size 40</p>
-                    <p class="discount">40$</p>
-                  </div>
-                  <a href="{% url 'details_url' %}" class="product_button">View</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product">
-              <div class="product_card">
-                <img src="{% static 'assets/images/product2.jpg' %}" alt="Product-4" />
-                <div class="card_body">
-                  <div class="body_part">
-                    <p class="title">T-shirt</p>
-                    <p class="price">90$</p>
-                  </div>
-                  <div class="body_part">
-                    <p class="description">Size 32</p>
-                    <p class="discount">85$</p>
-                  </div>
-
-                  <a href="{% url 'details_url' %}" class="product_button">View</a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

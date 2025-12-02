@@ -1,39 +1,61 @@
 from django.db import models
 from django_jalali.db import models as jmodels
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Book(models.Model):
-    LANGUAGES = [
-        ('0','farsi'),
-        ('1','arabic'),
-        ('2','english'),
+class Product(models.Model):
+    SIZES = [
+        ('0','M'),
+        ('1','L'),
+        ('2','XL'),
+        ('3','XXL'),
     ]
-    title = models.CharField(max_length=127, null=True,default='test', verbose_name='نام')
-    description = models.TextField(max_length=2047, null=True, blank=True, verbose_name='توضیحات')
-    price = models.IntegerField(default=99, verbose_name='قیمت')
-    rate = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True, default=0.00, verbose_name='امتیاز')
-    publisher = models.CharField(max_length=127, null=True, blank=True, verbose_name='ناشر')
-    is_released = models.BooleanField( default=True, blank=True, verbose_name='انتشار')
-    release_date = jmodels.jDateField(null=True, blank=True, verbose_name='تاریخ انتشار')
-    created_at = models.DateTimeField(null=True, auto_now_add=True, verbose_name='تاریخ ساخت')
-    updated_at = models.DateTimeField(null=True, auto_now=True, verbose_name='تاریخ آپدیت')
-    language = models.CharField(max_length=1, choices=LANGUAGES, default='0', verbose_name='زبان')
-    writer = models.ForeignKey('Writer',on_delete=models.SET_NULL, null=True, blank=True, verbose_name='نویسنده')
-    categories = models.ManyToManyField('Category', blank=True, verbose_name='دسته بمدی')
 
+    
+    title = models.CharField(max_length=127, null=True, verbose_name='عنوان')
+    price = models.DecimalField(max_digits=4, null=True, decimal_places=2, verbose_name='قیمت')
+    size = models.CharField(max_length=1, null=True, choices=SIZES, verbose_name='سایز')
+    description = models.TextField(max_length=2047, null=True, verbose_name='توضیحات')
+    static_discount = models.DecimalField(max_digits=4, null=True, decimal_places=2, verbose_name='قیمت تخفیف', blank=True)
+    percent_dicount = models.IntegerField(null=True, blank=True)
+
+    product_features = models.ManyToManyField('ProductFeature')
+    image = models.ImageField(upload_to='Product_images/', null=True)
+    
     def __str__(self):
         return self.title
+    
+    @property
+    def final_price(self):
+        if self.static_discount:
+            return self.price - self.static_discount
+        elif self.percent_dicount:
+            return self.price * (1 - self.percent_dicount/100)
+        else:
+            return self.price
 
+         
 
-class Writer(models.Model):
-    first_name = models.CharField(max_length=127, null=True)
-    last_name = models.CharField(max_length=127, null=True)
-
-    def __str__(self):
-        return self.first_name + " " + self.last_name
-
-class Category(models.Model):
-    name = models.CharField(max_length=127, null=True)
+class ProductFeature(models.Model):
+    name = models.CharField(max_length=127, null=True, verbose_name='ویژگی')
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    SUGGESTION = [
+        ('0','I suggest this Product'),
+        ('1',"I don't suggest this Product"),
+        ('2','I have no idea.'),
+    ]
+
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, verbose_name='نویسنده')
+    body = models.TextField(max_length=2047, null=True, verbose_name='متن')
+    suggestion = models.CharField(max_length=1, choices=SUGGESTION, null=True, verbose_name='خلاصه')
+
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL, verbose_name='محصول')
+
+    def __str__(self):
+        return self.body[:50]
+    
