@@ -71,48 +71,51 @@
       </section>
       <!-- New Products -->
       <section class="new_products">
-        <section class="filter-section">
-        <!-- Search Input -->
-        <div class="filter-group">
-            <span class="filter-title">Search</span>
-            <input type="text" class="search-input" placeholder="Enter keywords...">
-        </div>
-        
-        <!-- Checkbox Options -->
-        <div class="filter-group">
-            <span class="filter-title">Category</span>
-            <div class="checkbox-group">
-                <div class="checkbox-option">
-                    <input type="checkbox" id="option1" name="category" value="electronics">
-                    <label for="option1">M</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="option2" name="category" value="clothing">
-                    <label for="option2">L</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="option3" name="category" value="home">
-                    <label for="option3">XL</label>
-                </div>
-                <div class="checkbox-option">
-                    <input type="checkbox" id="option4" name="category" value="books">
-                    <label for="option4">XXL</label>
+        <form action="" method="GET">
+          <section class="filter-section">
+            <!-- Search Input -->
+            <div class="filter-group">
+                <span class="filter-title">Search</span>
+                <input type="text" class="search-input" placeholder="Enter keywords..." name="q">
+            </div>
+            
+            <!-- Checkbox Options -->
+            <div class="filter-group">
+                <span class="filter-title">Category</span>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="option1" name="category" value="0">
+                        <label for="option1">M</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="option2" name="category" value="1">
+                        <label for="option2">L</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="option3" name="category" value="2">
+                        <label for="option3">XL</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="option4" name="category" value="3">
+                        <label for="option4">XXL</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Price Range -->
-        <div class="filter-group">
-            <span class="filter-title">Price Range</span>
-            <div class="price-range-container">
-                <input type="range" min="0" max="1000" value="200" class="price-slider" id="priceSlider">
-                <div class="price-values">
-                    <div class="price-value">Min: $<span id="minPrice">0</span></div>
-                    <div class="price-value">Max: $<span id="maxPrice">200</span></div>
+            
+            <!-- Price Range -->
+            <div class="filter-group">
+                <span class="filter-title">Price Range</span>
+                <div class="price-range-container">
+                    <input type="range" min="0" max="1000" name="price" value="200" class="price-slider" id="priceSlider">
+                    <div class="price-values">
+                        <div class="price-value">Min: $<span id="minPrice">0</span></div>
+                        <div class="price-value">Max: $<span id="maxPrice">200</span></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <button type="submit">Search . . .</button>
+          </section>
+        </form>
         <div class="container">
           <h2>New Products</h2>
 
@@ -228,7 +231,7 @@
           <div class="under_part">
             <a href="#"
               ><img
-                src="assets/images/icons/instagram-167-svgrepo-com.svg' %}"
+                src="{% static 'assets/images/icons/instagram-167-svgrepo-com.svg' %}"
                 alt="instagram"
             /></a>
             <a href="#"
@@ -268,11 +271,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             updatePriceDisplay();
             
-            // Add functionality to search input
-            const searchInput = document.querySelector('.search-input');
-            searchInput.addEventListener('input', function() {
-                console.log('Searching for:', this.value);
-            });
+
             
             // Add functionality to checkboxes
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
