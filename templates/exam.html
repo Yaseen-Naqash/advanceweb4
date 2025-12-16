@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Shop</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ece9e6, #ffffff);
+        }
+
+        header {
+            background: #222;
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .hero {
+            background: url('https://picsum.photos/1600/500') center/cover no-repeat;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .container {
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .product h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .product p {
+            font-size: 14px;
+            color: #444;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #000;
+        }
+
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .search-box input {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: none;
+            width: 200px;
+        }
+
+        header {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .product {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">MY SHOP</div>
+        <div class="search-box"><input type="text" placeholder="Search products..."></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <div class="hero">Welcome to Our Shop</div>
+    <div class="container">
+        <div class="section-title">Featured Products</div>
+        <div class="products" id="product-list"></div>
+    </div>
+    <footer>© 2025 My Shop</footer>
+    <script>
+        const sampleProducts = [
+            { name: "Product One", price: "$25", img: "https://picsum.photos/300" },
+            { name: "Product Two", price: "$40", img: "https://picsum.photos/300" },
+            { name: "Product Three", price: "$18", img: "https://picsum.photos/300" },
+            { name: "Product Four", price: "$30", img: "https://picsum.photos/300" }
+        ];
+        const container = document.getElementById('product-list');
+        sampleProducts.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'product';
+            item.innerHTML = `
+<img src="${p.img}" />
+<h3>${p.name}</h3>
+<p>${p.price}</p>
+<button>Add to Cart</button>
+`;
+            container.appendChild(item);
+        });
+    </script>
+</body>
+
+</html>

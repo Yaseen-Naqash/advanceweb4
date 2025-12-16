@@ -67,31 +67,28 @@
             <div class="single_product_section">
               <div class="single_product_right">
                 <div class="single_product_body">
-                  <h4 class="single_product_title">T-Shirt gray color</h4>
-                  <p class="single_product_price">$40</p>
+                  <h4 class="single_product_title">{{ product.title }}</h4>
+                  <p class="single_product_price">${{ product.price }}</p>
                 </div>
                 <div class="single_product_sizes">
-                  <p class="single_product_size">XXL</p>
-                  <p class="single_product_size">XL</p>
-                  <p class="single_product_size">L</p>
-                  <p class="single_product_size">M</p>
+                  <p class="single_product_size {% if product.size == '3' %} size_checked {% endif %}">XXL</p>
+                  <p class="single_product_size {% if product.size == '2' %} size_checked {% endif %}">XL</p>
+                  <p class="single_product_size {% if product.size == '1' %} size_checked {% endif %}">L</p>
+                  <p class="single_product_size {% if product.size == '0' %} size_checked {% endif %}">M</p>
                 </div>
                 <div class="single_product_features">
                   <h4 class="single_product_features_title">
                     Product features:
                   </h4>
-                  <p class="single_product_features">Simple</p>
-                  <p class="single_product_features">150CM</p>
-                  <p class="single_product_features">Gray</p>
+                  {% for x in product.product_features.all %}
+                  <p class="single_product_features">{{ x.name }}</p>
+
+                  {% endfor %}
                 </div>
                 <div class="single_product_description">
                   <h4 class="single_product_description_title">Details:</h4>
                   <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Magnam consectetur numquam inventore facilis sapiente
-                    distinctio expedita. Error esse consequatur aspernatur iure
-                    eligendi, recusandae cumque quas at ducimus explicabo
-                    officia nihil!
+                    {{ product.description }}
                   </p>
                 </div>
                 <div class="single_product_btn">

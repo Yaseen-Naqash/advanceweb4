@@ -63,6 +63,11 @@
   cursor: pointer;
 }
 
+.size_checked{
+  background-color: #1a2980;
+  color: white;
+}
+
 .add_to_cart {
   margin-top: 20px;
   border: none;

@@ -53,6 +53,12 @@ class BookAdmin(admin.ModelAdmin):
 
 from .models import Product, ProductFeature, Comment
 
-admin.site.register(Product)
+
+class ProductAdmin(admin.ModelAdmin):
+    search_fields = ['title']
+
+    list_filter = ['size']
+    pass
+admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductFeature)
 admin.site.register(Comment)

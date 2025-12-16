@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Product
+from django.http import HttpResponse
 # Create your views here.
 
 def homePage(request):
@@ -15,12 +16,18 @@ def homePage(request):
     return render(request, 'index.html', context)
 
 
-def details(request):
-    # product = Product.objects.get(price=87.90)
-    # Product.objects.create(
-    #     title = 'hello world',
-    #     price = 50.00,
-        
-    # )
+def details(request, pk):
 
-    return render(request, 'single.html')
+    try:
+        product = Product.objects.get(id=pk)
+    except Product.DoesNotExist:
+        return HttpResponse("Product not found")
+
+
+    context = {
+        'product': product,
+    }
+    
+
+    return render(request, 'single.html', context)
+

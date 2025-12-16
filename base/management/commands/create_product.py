@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from base.models import ProductFeature
+from base.models import ProductFeature, Product
 import random
 from django.utils.text import slugify
 
@@ -104,8 +104,11 @@ class Command(BaseCommand):
             "Plant-based dyes create beautiful colors without chemical pollutants."
         ]
 
+
         # Create 70 products with random data
         for i in range(70):
+
+
             # Random selection from available data
             title = random.choice(clothing_titles) + f" {random.choice(['Pro', 'Elite', 'Essential', 'Classic', 'Premium', 'Luxe'])}"
             price = round(random.uniform(29.99, 299.99), 2)
@@ -132,7 +135,7 @@ class Command(BaseCommand):
                 size = size,
                 description = description,
                 static_discount = static_discount,
-                percent_discount = percent_discount,
+                percent_dicount = percent_discount,
                 # Note: image field will need to be handled separately
             )
             

@@ -11,16 +11,16 @@ class Product(models.Model):
         ('3','XXL'),
     ]
 
-    
+
     title = models.CharField(max_length=127, null=True, verbose_name='عنوان')
-    price = models.DecimalField(max_digits=4, null=True, decimal_places=2, verbose_name='قیمت')
+    price = models.DecimalField(max_digits=6, null=True, decimal_places=2, verbose_name='قیمت')
     size = models.CharField(max_length=1, null=True, choices=SIZES, verbose_name='سایز')
     description = models.TextField(max_length=2047, null=True, verbose_name='توضیحات')
     static_discount = models.DecimalField(max_digits=4, null=True, decimal_places=2, verbose_name='قیمت تخفیف', blank=True)
     percent_dicount = models.IntegerField(null=True, blank=True)
 
     product_features = models.ManyToManyField('ProductFeature')
-    image = models.ImageField(upload_to='Product_images/', null=True)
+    image = models.ImageField(upload_to='Product_images/', null=True, default='store.png')
     
     def __str__(self):
         return self.title
