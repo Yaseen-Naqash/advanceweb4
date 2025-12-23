@@ -129,7 +129,7 @@
                 <div class="card_body">
                   <div class="body_part">
                     <p class="title">{{ product.title }}</p>
-                    <p class="price" {% if product.price == product.final_price %}style="text-decoration: none;"{% endif %} >{{ product.price }}$</p>
+                    <p class="price"{% if product.price == product.final_price %}style="text-decoration: none;"{% endif %} >{{ product.price }}$</p>
                   </div>
                   <div class="body_part">
                     <p class="description">Size {{ product.get_size_display }}</p>

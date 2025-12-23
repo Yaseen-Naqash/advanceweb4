@@ -33,8 +33,7 @@ class Product(models.Model):
             return self.price * (1 - self.percent_dicount/100)
         else:
             return self.price
-
-         
+  
 
 class ProductFeature(models.Model):
     name = models.CharField(max_length=127, null=True, verbose_name='ویژگی')
@@ -59,3 +58,4 @@ class Comment(models.Model):
     def __str__(self):
         return self.body[:50]
     
+
