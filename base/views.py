@@ -1,7 +1,11 @@
-from django.shortcuts import render
-from .models import Product
+from django.shortcuts import render, redirect
+from .models import Product, Person
 from django.http import HttpResponse
 from django.db.models import Q
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
+from django.contrib import messages
+
 # Create your views here.
 
 def homePage(request):
@@ -46,3 +50,38 @@ def details(request, pk):
 
     return render(request, 'single.html', context)
 
+def sign_in(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home_url')
+        else:
+            messages.error(request, 'username or password is incorrect')
+            return redirect('login_url')
+    
+    return render(request, 'login.html')
+
+def sign_up(request):
+
+
+
+    user = Person.objects.create(
+
+    )
+    s
+    return
+
+
+def logout_command(request):
+    logout(request)
+    return redirect('home_url')
+
+
+
+# login
+# logout
+# authenticate

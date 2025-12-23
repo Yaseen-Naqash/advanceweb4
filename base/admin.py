@@ -5,7 +5,6 @@ from django.contrib import admin
 # admin.site.register(Category)
 # admin.site.register(Writer)
 
-
 class BookAdmin(admin.ModelAdmin):
     # list view
     search_fields = ['title']
@@ -51,7 +50,7 @@ class BookAdmin(admin.ModelAdmin):
 
 
 
-from .models import Product, ProductFeature, Comment
+from .models import Product, ProductFeature, Comment, Person
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -62,3 +61,4 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductFeature)
 admin.site.register(Comment)
+admin.site.register(Person)

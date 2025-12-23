@@ -1,6 +1,6 @@
 from django.db import models
 from django_jalali.db import models as jmodels
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 # Create your models here.
 class Product(models.Model):
@@ -49,7 +49,7 @@ class Comment(models.Model):
         ('2','I have no idea.'),
     ]
 
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, verbose_name='نویسنده')
+    user = models.ForeignKey('Person', null=True, on_delete=models.SET_NULL, verbose_name='نویسنده')
     body = models.TextField(max_length=2047, null=True, verbose_name='متن')
     suggestion = models.CharField(max_length=1, choices=SUGGESTION, null=True, verbose_name='خلاصه')
 
@@ -58,4 +58,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.body[:50]
     
+
+class Person(AbstractUser):
+    phone = models.CharField(max_length=127, null=True, blank=True)
 

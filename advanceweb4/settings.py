@@ -133,3 +133,5 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = 'uploaded_images'
+
+AUTH_USER_MODEL = 'base.Person'

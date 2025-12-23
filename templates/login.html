@@ -206,13 +206,14 @@
     </style>
 </head>
 <body>
-      <!-- {% if messages %}
+    {% if messages %}
     <ul class="messages">
         {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
-    {% endif %} -->
+    {% endif %}
+     
     <div class="container">
         <div class="form-toggle">
             <button class="toggle-btn active" id="login-toggle">Login</button>
@@ -222,7 +223,7 @@
         <div class="form-container">
             <!-- Login Form -->
             <form class="form active" id="login-form" method='POST'>
-              
+                {% csrf_token %}
                 <h2>Welcome Back</h2>
                 
                 <div class="form-group">
@@ -260,7 +261,7 @@
             </form>
 
             <!-- Sign Up Form -->
-            <form class="form" id="signup-form">
+            <form class="form" id="signup-form" action="{% url 'signup_url' %}">
                 <h2>Create Account</h2>
                 
                 <div class="form-group">
