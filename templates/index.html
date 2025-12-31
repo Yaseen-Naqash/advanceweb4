@@ -75,6 +75,16 @@
           </div>
         </div>
       </section>
+            <div style="padding: 20px;">
+
+            </div>
+              <h1 style="text-align: center;">wishlist</h1>
+              <ul>
+            
+            {% for item in request.user.wishlist.first.products.all %}
+            <li><a href="{% url 'details_url' item.id %}">{{ item.title }}</a></li>
+            {% endfor %}
+            </ul>
       <!-- New Products -->
       <section class="new_products">
         <form action="" method="GET">

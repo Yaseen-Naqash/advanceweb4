@@ -61,4 +61,23 @@ class Comment(models.Model):
 
 class Person(AbstractUser):
     phone = models.CharField(max_length=127, null=True, blank=True)
+    profile_image = models.ImageField(null=True, blank=True)
+
+
+class Cart(models.Model):
+    user = models.ForeignKey('Person', null=True, on_delete=models.SET_NULL, verbose_name='نویسنده')
+    products = models.ManyToManyField(Product)
+
+
+    @property
+    def totalPrice(self):
+        sum = 0
+        for item in self.products.all():
+            sum += item.price
+
+        return sum
+    
+class Wishlist(models.Model):
+    user = models.ForeignKey('Person', null=True, on_delete=models.SET_NULL, verbose_name='نویسنده', related_name='wishlist')
+    products = models.ManyToManyField(Product)
 

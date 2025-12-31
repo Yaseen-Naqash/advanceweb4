@@ -50,7 +50,7 @@ class BookAdmin(admin.ModelAdmin):
 
 
 
-from .models import Product, ProductFeature, Comment, Person
+from .models import Product, ProductFeature, Comment, Person, Wishlist
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -62,3 +62,5 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductFeature)
 admin.site.register(Comment)
 admin.site.register(Person)
+admin.site.register(Wishlist)
+

@@ -6,10 +6,13 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
+
+
+
 # Create your views here.
 
 def homePage(request):
-    
 
     # filtered_products = Product.objects.filter(id=1)
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -33,8 +36,10 @@ def homePage(request):
 
     return render(request, 'index.html', context)
 
-
+@login_required
 def details(request, pk):
+
+
 
     try:
         product = Product.objects.get(id=pk)
@@ -66,14 +71,32 @@ def sign_in(request):
     return render(request, 'login.html')
 
 def sign_up(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        fullname = request.POST.get('fullname')
+        confirmpassword = request.POST.get('password2')
+        password = request.POST.get('password1')
+        image = request.FILES.get('image')
+        if password != confirmpassword:
+            messages.error(request, 'your password does not match!')
+            return redirect('logni_url')
+        try:
+            Person.objects.get(username=username)
+            messages.error(request, 'username already taken')
+            return redirect('login_url')
+        except Person.DoesNotExist:
+            user = Person.objects.create(
+                username=username,
+                first_name = fullname,
+                profile_image = image   
+            )
+            user.set_password(confirmpassword)
+            user.save()
+            pass
 
 
-
-    user = Person.objects.create(
-
-    )
-    s
-    return
+    messages.success(request, 'your account created succsessfully')
+    return redirect('login_url')
 
 
 def logout_command(request):

@@ -135,3 +135,6 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = 'uploaded_images'
 
 AUTH_USER_MODEL = 'base.Person'
+
+
+LOGIN_URL = 'login_url'
