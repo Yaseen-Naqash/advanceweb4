@@ -8,7 +8,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -17,7 +17,11 @@ def homePage(request):
     # filtered_products = Product.objects.filter(id=1)
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     products = Product.objects.filter(Q(title__icontains = q) | Q(description__icontains = q))
-    
+
+
+    page_number = request.GET.get('page_num') if request.GET.get('page_num') != None else 1
+    products_pagination = Paginator(products, 12)
+    products_list = products_pagination.get_page(page_number)
 
     category = request.GET.getlist('category')
     if len(category) != 0:
@@ -26,12 +30,8 @@ def homePage(request):
 
     products = products.filter(price__lte = price)
 
-
-
-    
     context = {
-
-        'products':products,
+        'products':products_list,
     }
 
     return render(request, 'index.html', context)

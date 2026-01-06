@@ -164,6 +164,26 @@
 
           </div>
         </div>
+
+        <div class="pagination">
+          <span class="step-links">
+              {% if products.has_previous %}
+                  <a href="?page_num=1">&laquo; first</a>
+                  <a href="?page_num={{ products.previous_page_number }}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                  Page {{ products.number }} of {{ products.paginator.num_pages }}.
+              </span>
+
+              {% if products.has_next %}
+                  <a href="?page_num={{ products.next_page_number }}">next</a>
+                  <a href="?page_num={{ products.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+
+
       </section>
 
       <!-- About us -->
@@ -206,6 +226,12 @@
           </div>
         </div>
       </section>
+
+
+      
+
+
+
     </main>
 
     <!-- Footer -->
