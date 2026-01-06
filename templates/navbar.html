@@ -1,0 +1,43 @@
+    
+    {% load static %}
+    
+    <!-- Hamber menu -->
+    <div id="hamber_body">
+      <nav>
+        <ul class="hamber_nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="pages/contact-us.html">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <nav>
+          <div class="header_wrapper">
+            <img src="{% static 'assets/images/logo.svg' %}" alt="Site logo" />
+            <ul class="nav_menu">
+              <li><a href="{% url 'home_url' %}">Home</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Categories</a></li>
+              <li><a href="">Contact us</a></li>
+            </ul>
+            <div class="header_btns">
+              {% if user.is_authenticated %}
+                <h2><strong>{{ user.username }}</strong></h2>
+                <a href="{% url 'logout_url' %}" style="padding: 20px;"><strong>LOG OUT</strong></a>
+              {% else %}
+                <a href="{% url 'login_url' %}" class="account_btn">Login | Sign up</a>
+              {% endif %}
+              
+              <button id="hamber_btn">
+                <img src="{% static 'assets/images/icons/menus.png' %}" alt="hamber_menu" />
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>

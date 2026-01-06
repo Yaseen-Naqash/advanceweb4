@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+
+
+    <title>{% block title %}  {% endblock title %}</title>
+
+
+    {% block extra_css %}  {% endblock extra_css %}
+
+</head>
+<body>
+
+    <header>
+        {% include "navbar.html" %}
+
+
+    </header>
+
+    <main>
+        {% block content %}
+            <h1>Page has no DATA</h1>
+        {% endblock %}
+    </main>
+
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+    
+    <script src="{% static 'js/script.js' %}"></script>
+
+{% block extra_js %}
+  
+{% endblock extra_js %}
+    
+    <script src=""></script>
+</body>
+</html>

@@ -537,7 +537,6 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 3px solid red;
   width: 100%;
   gap: 20px;
   height: 80px;

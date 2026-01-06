@@ -105,6 +105,9 @@ def logout_command(request):
 
 
 
+
+def test(request):
+    return render(request, 'base.html')
 # login
 # logout
 # authenticate
